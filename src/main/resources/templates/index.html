@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskFlow | Elegant Todo Management</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+<div class="app-container">
+  <header>
+    <div class="logo-container">
+      <div class="logo">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h1>TaskFlow</h1>
+    </div>
+    <div class="theme-toggle">
+      <i class="fas fa-moon"></i>
+    </div>
+  </header>
+
+  <main>
+    <div class="task-input-container">
+      <input type="text" id="taskInput" placeholder="What needs to be done?" />
+      <button id="addTaskBtn">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+
+    <div class="filters">
+      <div class="filter active" data-filter="all">All</div>
+      <div class="filter" data-filter="active">Active</div>
+      <div class="filter" data-filter="completed">Completed</div>
+    </div>
+
+    <div class="tasks-container">
+      <ul id="tasksList">
+        <!-- Tasks will be added here dynamically -->
+      </ul>
+    </div>
+
+    <div class="task-stats">
+      <span id="tasksCount">0 items left</span>
+      <button id="clearCompletedBtn">Clear completed</button>
+    </div>
+  </main>
+
+  <div class="empty-state hidden">
+    <div class="empty-state-icon">
+      <i class="fas fa-clipboard-list"></i>
+    </div>
+    <h2>Your task list is empty</h2>
+    <p>Add a new task to get started</p>
+  </div>
+
+  <!-- Task Edit Modal (only text editing, since our model only has `text`) -->
+  <div class="modal-overlay hidden" id="editModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Edit Task</h3>
+        <button class="close-modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="editTaskInput" placeholder="Update your task" />
+      </div>
+      <div class="modal-footer">
+        <button id="cancelEditBtn">Cancel</button>
+        <button id="saveTaskBtn">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notifications -->
+<div class="toast-container"></div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
