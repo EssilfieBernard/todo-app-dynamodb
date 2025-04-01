@@ -47,3 +47,20 @@ jobs:
           docker build -t $IMAGE_URI .
           echo "Pushing image ${IMAGE_URI}"
           docker push $IMAGE_URI
+          echo "::set-output name=image::${IMAGE_URI}"
+
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: image-definition.json
+          container-name: todo-container
+          image: ${{ steps.docker_build.outputs.image }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: todo-service
+          cluster: TodoAppCluster
+          wait-for-service-stability: true
