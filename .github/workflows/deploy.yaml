@@ -49,7 +49,7 @@ jobs:
           docker push $IMAGE_URI
           echo "::set-output name=image::${IMAGE_URI}"
 
-      - name: Fill in the new image ID in the Amazon ECS task definition
+      - name: Update ECS Task Definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
